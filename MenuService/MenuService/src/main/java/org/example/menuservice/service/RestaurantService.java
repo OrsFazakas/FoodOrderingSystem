@@ -7,6 +7,7 @@ import org.example.menuservice.exception.restaurant.RestaurantAlreadyExistsExcep
 import org.example.menuservice.exception.restaurant.RestaurantNotFoundException;
 import org.example.menuservice.model.MenuItem;
 import org.example.menuservice.model.Restaurant;
+import org.example.menuservice.service.interfaces.IMenuItemService;
 import org.example.menuservice.service.interfaces.IRestaurantService;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class RestaurantService implements IRestaurantService {
     private final RestaurantRepository restaurantRepository;
-    private final MenuItemService menuItemService;
+    private final IMenuItemService menuItemService;
 
     public Restaurant addRestaurant(Restaurant restaurantToAdd){
         String name = restaurantToAdd.getName();

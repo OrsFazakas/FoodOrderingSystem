@@ -7,10 +7,9 @@ import org.example.menuservice.dataTransferObjects.menuItem.out.MenuItemResponse
 import org.example.menuservice.dataTransferObjects.restaurant.in.RestaurantCreationDTO;
 import org.example.menuservice.dataTransferObjects.restaurant.mapper.RestaurantMapper;
 import org.example.menuservice.dataTransferObjects.restaurant.out.RestaurantResponseDTO;
-import org.example.menuservice.model.MenuItem;
-import org.example.menuservice.model.Restaurant;
 import org.example.menuservice.service.interfaces.IRestaurantService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,7 +69,8 @@ public class RestaurantController {
         return ResponseEntity.ok(menuItemSet);
     }
 
-    @PostMapping() // ADMIN ONLY
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping()
     public ResponseEntity<RestaurantResponseDTO> addRestaurant(@Valid @RequestBody RestaurantCreationDTO restaurantCreationDTO){
         RestaurantResponseDTO restaurantResponseDTO = restaurantMapper.toResponseDTO(
                                                             restaurantService.addRestaurant(
@@ -81,29 +81,33 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantResponseDTO);
     }
 
-    @PutMapping("/{id}") // ADMIN ONLY
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateRestaurant(@PathVariable Long id, @Valid @RequestBody RestaurantCreationDTO restaurantCreationDTO){
         restaurantService.updateRestaurant(id, restaurantMapper.toRestaurant(restaurantCreationDTO));
 
         return ResponseEntity.ok("Restaurant updated successfully!");
     }
 
-    @DeleteMapping("/{id}") // ADMIN ONLY
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRestaurant(@PathVariable Long id){
         restaurantService.deleteRestaurant(id);
 
         return ResponseEntity.ok("Restaurant deleted successfully!");
     }
 
-    @PostMapping("/{id}/menuItems") // ADMIN ONLY
-    public ResponseEntity<String> addRestaurantMenuItem(@PathVariable Long id, @RequestParam Long menuItemId){
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/{id}/menuItems/{menuItemId}")
+    public ResponseEntity<String> addRestaurantMenuItem(@PathVariable Long id, @PathVariable Long menuItemId){
         restaurantService.addMenuItem(id, menuItemId);
 
         return ResponseEntity.ok("Menu item successfully added to restaurant!");
     }
 
-    @DeleteMapping("/{id}/menuItems") // ADMIN ONLY
-    public ResponseEntity<String> deleteRestaurantMenuItem(@PathVariable Long id, @RequestParam Long menuItemId){
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}/menuItems/{menuItemId}")
+    public ResponseEntity<String> deleteRestaurantMenuItem(@PathVariable Long id, @PathVariable Long menuItemId){
         restaurantService.deleteMenuItem(id, menuItemId);
 
         return ResponseEntity.ok("Menu item successfully deleted from restaurant!");

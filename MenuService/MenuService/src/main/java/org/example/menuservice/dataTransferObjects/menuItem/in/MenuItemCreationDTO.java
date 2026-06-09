@@ -11,7 +11,6 @@ public record MenuItemCreationDTO(
         @NotNull(message = "Name field must not be null!")
         String name,
 
-        @NotBlank(message = "Price field must not be blank!")
         @NotNull(message = "Price field must not be null!")
         @PositiveOrZero(message = "Price must not be negative!")
         Float price

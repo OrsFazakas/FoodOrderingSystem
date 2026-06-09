@@ -7,6 +7,7 @@ import org.example.menuservice.dataTransferObjects.menuItem.mapper.MenuItemMappe
 import org.example.menuservice.dataTransferObjects.menuItem.out.MenuItemResponseDTO;
 import org.example.menuservice.service.interfaces.IMenuItemService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,7 +44,8 @@ public class MenuItemController {
         return ResponseEntity.ok(menuItemList);
     }
 
-    @PostMapping() // ADMIN ONLY
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping()
     public ResponseEntity<MenuItemResponseDTO> addMenuItem(@Valid @RequestBody MenuItemCreationDTO menuItemCreationDTO){
         MenuItemResponseDTO menuItemResponseDTO = menuItemMapper.toResponseDTO(
                                                         menuItemService.addMenuItem(
@@ -54,18 +56,20 @@ public class MenuItemController {
         return ResponseEntity.ok(menuItemResponseDTO);
     }
 
-    @PutMapping("/{id}") // ADMIN ONLY
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateMenuItem(@PathVariable Long id, @Valid @RequestBody MenuItemCreationDTO menuItemCreationDTO){
         menuItemService.updateMenuItem(id, menuItemMapper.toMenuItem(menuItemCreationDTO));
 
         return ResponseEntity.ok("Menu item updated successfully!");
     }
 
-    @DeleteMapping("/{id}") // ADMIN ONLY
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteMenuItem(@PathVariable Long id){
         menuItemService.deleteMenuItem(id);
 
-        return ResponseEntity.ok("Menu item updated successfully!");
+        return ResponseEntity.ok("Menu item deleted successfully!");
     }
 
 }
