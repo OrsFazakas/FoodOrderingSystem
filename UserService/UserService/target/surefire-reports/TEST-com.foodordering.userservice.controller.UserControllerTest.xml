@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.foodordering.userservice.service.UserServiceTest" time="0.083" tests="9" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.foodordering.userservice.controller.UserControllerTest" time="1.904" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -62,13 +62,437 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="updateProfile_updatesEmail" classname="com.foodordering.userservice.service.UserServiceTest" time="0.011"/>
-  <testcase name="userExists_returnsFalseWhenNotExists" classname="com.foodordering.userservice.service.UserServiceTest" time="0.005"/>
-  <testcase name="userExists_returnsTrueWhenExists" classname="com.foodordering.userservice.service.UserServiceTest" time="0.004"/>
-  <testcase name="getAllUsers_returnsList" classname="com.foodordering.userservice.service.UserServiceTest" time="0.02"/>
-  <testcase name="getUserById_throwsWhenNotFound" classname="com.foodordering.userservice.service.UserServiceTest" time="0.007"/>
-  <testcase name="getProfile_success" classname="com.foodordering.userservice.service.UserServiceTest" time="0.004"/>
-  <testcase name="updateProfile_updatesPassword" classname="com.foodordering.userservice.service.UserServiceTest" time="0.006"/>
-  <testcase name="getProfile_throwsWhenNotFound" classname="com.foodordering.userservice.service.UserServiceTest" time="0.006"/>
-  <testcase name="getUserById_success" classname="com.foodordering.userservice.service.UserServiceTest" time="0.008"/>
+  <testcase name="getAllUsers_returns403ForCustomer" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.28">
+    <system-out><![CDATA[2026-06-12T00:33:43.029+03:00  INFO 15172 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.foodordering.userservice.controller.UserControllerTest]: UserControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-06-12T00:33:43.038+03:00  INFO 15172 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.foodordering.userservice.UserServiceApplication for test class com.foodordering.userservice.controller.UserControllerTest
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+]]></system-out>
+  </testcase>
+  <testcase name="getAllUsers_returnsListForAdmin" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.183">
+    <system-out><![CDATA[Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+]]></system-out>
+  </testcase>
+  <testcase name="getMyProfile_returns401WhenNotAuthenticated" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.16">
+    <system-out><![CDATA[Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+]]></system-out>
+  </testcase>
+  <testcase name="userExists_returnsTrueWhenFound" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.457">
+    <system-out><![CDATA[Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+]]></system-out>
+  </testcase>
+  <testcase name="getUserById_returns404WhenNotFound" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.188">
+    <system-out><![CDATA[Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+]]></system-out>
+  </testcase>
+  <testcase name="getUserById_returnsUser" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.203">
+    <system-out><![CDATA[Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+]]></system-out>
+  </testcase>
+  <testcase name="getMyProfile_returnsProfile" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.203">
+    <system-out><![CDATA[Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+]]></system-out>
+  </testcase>
+  <testcase name="userExists_returnsFalseWhenNotFound" classname="com.foodordering.userservice.controller.UserControllerTest" time="0.193">
+    <system-out><![CDATA[Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    delete 
+    from
+        users 
+    where
+        id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (email, password, role, username) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password,
+        u1_0.role,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+]]></system-out>
+  </testcase>
 </testsuite>

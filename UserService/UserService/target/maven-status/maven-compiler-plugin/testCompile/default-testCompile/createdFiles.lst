@@ -1,2 +1,4 @@
+com\foodordering\userservice\controller\AuthControllerTest.class
 com\foodordering\userservice\service\AuthServiceTest.class
+com\foodordering\userservice\controller\UserControllerTest.class
 com\foodordering\userservice\service\UserServiceTest.class
