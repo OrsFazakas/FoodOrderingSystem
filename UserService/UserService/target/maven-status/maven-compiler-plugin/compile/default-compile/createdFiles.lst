@@ -3,8 +3,6 @@ com\foodordering\userservice\service\AuthService.class
 com\foodordering\userservice\config\SwaggerConfig.class
 com\foodordering\userservice\controller\AuthController.class
 com\foodordering\userservice\dto\UpdateProfileRequest.class
-com\foodordering\userservice\exception\ConflictException.class
-com\foodordering\userservice\exception\UnauthorizedException.class
 com\foodordering\userservice\dto\RegisterRequest.class
 com\foodordering\userservice\service\UserDetailsServiceImpl.class
 com\foodordering\userservice\dto\LoginRequest.class
@@ -13,6 +11,7 @@ com\foodordering\userservice\filter\JwtAuthenticationFilter.class
 com\foodordering\userservice\repository\UserRepository.class
 com\foodordering\userservice\entity\User.class
 com\foodordering\userservice\entity\Role.class
+com\foodordering\userservice\exception\UserNotFoundException.class
 com\foodordering\userservice\config\SecurityConfig.class
 com\foodordering\userservice\dto\AuthResponse.class
 com\foodordering\userservice\dto\UserProfileResponse.class

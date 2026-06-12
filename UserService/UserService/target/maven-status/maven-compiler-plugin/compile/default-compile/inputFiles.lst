@@ -1,3 +1,4 @@
+C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\exception\UserNotFoundException.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\exception\UserAlreadyExistsException.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\dto\LoginRequest.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\service\AuthService.java
@@ -12,11 +13,9 @@ C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\User
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\exception\GlobalExceptionHandler.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\UserServiceApplication.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\entity\Role.java
-C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\exception\UnauthorizedException.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\dto\UserProfileResponse.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\service\UserService.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\controller\UserController.java
-C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\exception\ConflictException.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\service\UserDetailsServiceImpl.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\config\SecurityConfig.java
 C:\Users\Edy\Desktop\Work\NTT Data\nttdata-food-ordering-system\UserService\UserService\src\main\java\com\foodordering\userservice\dto\UpdateProfileRequest.java
