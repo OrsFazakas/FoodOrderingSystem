@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderService {
@@ -33,14 +34,17 @@ public class OrderService {
 
         // 1. Validate user via User Service
         try {
-            Boolean userExists = userServiceClient.checkUserExists(requestDto.userId());
-            if (userExists == null || !userExists) {
+            Map<String, Boolean> response = userServiceClient.checkIfUserExists(requestDto.userId());
+
+            Boolean userExists = (response != null && response.containsKey("exists")) ? response.get("exists") : false;
+
+            if (!userExists) {
                 throw new ResourceNotFoundException("Order placement failed: User not found with ID: " + requestDto.userId());
             }
         } catch (ResourceNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new RuntimeException("User Service is unavailable or an error occurred during user validation.");
+            throw new RuntimeException("User Service is unavailable or an error occurred during user validation. Details: " + e.getMessage(), e);
         }
 
         Order order = new Order();
