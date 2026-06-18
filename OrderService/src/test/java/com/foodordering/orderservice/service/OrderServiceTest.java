@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +55,7 @@ class OrderServiceTest {
     @Test
     void createOrder_Success() {
         // GIVEN
-        when(userServiceClient.checkUserExists(1L)).thenReturn(true);
+        when(userServiceClient.checkIfUserExists(1L)).thenReturn(Map.of("exists", true));
         when(menuServiceClient.getMenuItemById(101L)).thenReturn(mockMenuItem);
 
         when(orderRepository.save(any(Order.class))).thenAnswer(invocation -> {
@@ -72,7 +73,7 @@ class OrderServiceTest {
         assertEquals(OrderStatus.CREATED, response.status());
         assertEquals(new BigDecimal("5000.00"), response.totalPrice());
 
-        verify(userServiceClient, times(1)).checkUserExists(1L);
+        verify(userServiceClient, times(1)).checkIfUserExists(1L);
         verify(menuServiceClient, times(1)).getMenuItemById(101L);
         verify(orderRepository, times(1)).save(any(Order.class));
     }
@@ -80,7 +81,7 @@ class OrderServiceTest {
     @Test
     void createOrder_ThrowsException_WhenUserNotFound() {
         // GIVEN
-        when(userServiceClient.checkUserExists(1L)).thenReturn(false);
+        when(userServiceClient.checkIfUserExists(1L)).thenReturn(Map.of("exists", false));
 
         // WHEN & THEN
         assertThrows(ResourceNotFoundException.class, () -> orderService.createOrder(validRequestDto));
