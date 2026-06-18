@@ -20,7 +20,6 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // ÚJ: Kiolvassa a "role" mezőt, amit a User Service rakott a tokenbe
     public String extractRole(String token) {
         return extractAllClaims(token).get("role", String.class);
     }

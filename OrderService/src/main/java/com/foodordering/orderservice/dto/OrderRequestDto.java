@@ -6,10 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record OrderRequestDto(
-        @NotNull(message = "A felhasználó azonosító (userId) nem lehet null!")
+        @NotNull(message = "User ID (userId) cannot be null!")
         Long userId,
 
-        @NotEmpty(message = "A rendelésnek legalább egy tételt tartalmaznia kell!")
+        @NotEmpty(message = "The order must contain at least one item!")
         @Valid
         List<OrderItemRequestDto> items
 ) {}

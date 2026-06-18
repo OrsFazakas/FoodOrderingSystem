@@ -1,3 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+data:
+  init.sql: |
+    CREATE DATABASE userservice_db;
+    CREATE DATABASE menu_db;
+    CREATE DATABASE order_db;
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,11 +29,16 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRES_USER
-              value: "admin"
+              value: "postgres"
             - name: POSTGRES_PASSWORD
-              value: "password"
-            - name: POSTGRES_DB
-              value: "food_ordering"
+              value: "1234"
+          volumeMounts:
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d/
+      volumes:
+        - name: init-script
+          configMap:
+            name: postgres-init-script
 ---
 apiVersion: v1
 kind: Service
@@ -61,13 +76,13 @@ spec:
             - name: SERVER_PORT
               value: "8081"
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://postgres:5432/food_ordering"
+              value: "jdbc:postgresql://postgres:5432/userservice_db"
             - name: SPRING_DATASOURCE_USERNAME
-              value: "admin"
+              value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "password"
+              value: "1234"
             - name: JWT_SECRET
-              value: "SecretSuperKeyForFoodOrderingAppThatIsVeryLong!"
+              value: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"
 ---
 apiVersion: v1
 kind: Service
@@ -105,13 +120,13 @@ spec:
             - name: SERVER_PORT
               value: "8082"
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://postgres:5432/food_ordering"
+              value: "jdbc:postgresql://postgres:5432/menu_db"
             - name: SPRING_DATASOURCE_USERNAME
-              value: "admin"
+              value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "password"
+              value: "1234"
             - name: JWT_SECRET
-              value: "SecretSuperKeyForFoodOrderingAppThatIsVeryLong!"
+              value: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"
 ---
 apiVersion: v1
 kind: Service
@@ -149,13 +164,13 @@ spec:
             - name: SERVER_PORT
               value: "8083"
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://postgres:5432/food_ordering"
+              value: "jdbc:postgresql://postgres:5432/order_db"
             - name: SPRING_DATASOURCE_USERNAME
-              value: "admin"
+              value: "postgres"
             - name: SPRING_DATASOURCE_PASSWORD
-              value: "password"
+              value: "1234"
             - name: JWT_SECRET
-              value: "SecretSuperKeyForFoodOrderingAppThatIsVeryLong!"
+              value: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"
             - name: USER_SERVICE_URL
               value: "http://user-service:8081"
             - name: MENU_SERVICE_URL
