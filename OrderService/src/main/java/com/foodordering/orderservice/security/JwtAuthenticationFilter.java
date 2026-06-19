@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            //if (jwtService.isTokenValid(jwt)) {
+            if (jwtService.isTokenValid(jwt)) {
                 String role = jwtService.extractRole(jwt);
 
                 if (role != null) {
@@ -53,7 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
-            //}
+            }
         }
 
         filterChain.doFilter(request, response);

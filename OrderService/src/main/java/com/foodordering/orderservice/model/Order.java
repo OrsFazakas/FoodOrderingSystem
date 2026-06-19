@@ -35,7 +35,6 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    // Helper metódus a kétoldalú kapcsolat tiszta kezeléséhez
     public void addOrderItem(OrderItem item) {
         orderItems.add(item);
         item.setOrder(this);

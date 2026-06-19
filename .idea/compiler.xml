@@ -15,18 +15,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+        <module name="user-service" />
+        <module name="MenuService" />
         <module name="orderservice" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="user-service" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="MenuService" options="-parameters" />
       <module name="MenuService.main" options="-parameters" />
       <module name="MenuService.test" options="-parameters" />
+      <module name="api-gateway" options="-parameters" />
       <module name="orderservice" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
