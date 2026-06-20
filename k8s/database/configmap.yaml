@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+data:
+  init.sql: |
+    CREATE DATABASE userservice_db;
+    CREATE DATABASE menu_db;
+    CREATE DATABASE order_db;

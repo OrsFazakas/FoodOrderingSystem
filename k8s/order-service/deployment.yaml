@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: order-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SERVER_PORT
+              value: "8083"
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: food-ordering-config
+                  key: orderservice-db-url
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: food-ordering-config
+                  key: postgres-user
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: food-ordering-secrets
+                  key: postgres-password
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: food-ordering-secrets
+                  key: jwt-secret
+            - name: USER_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: food-ordering-config
+                  key: user-service-url
+            - name: MENU_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: food-ordering-config
+                  key: menu-service-url

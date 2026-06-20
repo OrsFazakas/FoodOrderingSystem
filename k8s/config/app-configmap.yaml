@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: food-ordering-config
+data:
+  postgres-user: "postgres"
+  userservice-db-url: "jdbc:postgresql://postgres:5432/userservice_db"
+  menuservice-db-url: "jdbc:postgresql://postgres:5432/menu_db"
+  orderservice-db-url: "jdbc:postgresql://postgres:5432/order_db"
+  user-service-url: "http://user-service:8081"
+  menu-service-url: "http://menu-service:8082"
+  order-service-url: "http://order-service:8083"

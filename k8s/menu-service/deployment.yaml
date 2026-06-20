@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: menu-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: menu-service
+  template:
+    metadata:
+      labels:
+        app: menu-service
+    spec:
+      containers:
+        - name: menu-service
+          image: menu-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+          env:
+            - name: SERVER_PORT
+              value: "8082"
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: food-ordering-config
+                  key: menuservice-db-url
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: food-ordering-config
+                  key: postgres-user
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: food-ordering-secrets
+                  key: postgres-password
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: food-ordering-secrets
+                  key: jwt-secret
