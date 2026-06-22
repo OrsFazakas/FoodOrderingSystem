@@ -4,7 +4,7 @@ metadata:
   name: food-ordering-ingress
 spec:
   rules:
-    - host: food-order.local
+    - host: food-order.ors-food-ordering.com
       http:
         paths:
           - path: /
@@ -15,7 +15,7 @@ spec:
                 port:
                   number: 8080
 
-    - host: menu.food-order.local
+    - host: menu.food-order.ors-food-ordering.com
       http:
         paths:
           - path: /
