@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: menu-service
-          image: menu-service:latest
+          image: fazakas/menu-service:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082
