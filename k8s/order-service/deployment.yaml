@@ -19,7 +19,7 @@ spec:
       containers:
         - name: order-service
           image: fazakas/order-service:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8083
           env:
