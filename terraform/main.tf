@@ -58,7 +58,7 @@ resource "google_compute_firewall" "allow_web_ssh" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22", "80", "443"] # 22: SSH (kezelés), 80/443: Web (a klienseknek)
+    ports    = ["22", "80", "443", "6443"]
   }
 
   source_ranges = ["0.0.0.0/0"] # Bárhonnan
@@ -69,8 +69,7 @@ resource "google_compute_firewall" "allow_web_ssh" {
 resource "google_compute_firewall" "allow_k3s_internal" {
   name    = "allow-k3s-internal"
   network = "default"
-
-  # Ezek a portok a K3s "idegrendszere".
+  
   # A 6443 a fővezérlő (API Server), a többi a podok közötti beszélgetéshez kell.
   allow {
     protocol = "tcp"
